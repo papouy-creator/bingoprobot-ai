@@ -7,7 +7,7 @@ export default {
         system: "BINGO AI PRO",
         status: "ONLINE",
         market_data: "NOT_CONNECTED",
-        telegram: env.BOT_TOKEN ? "CONFIGURED" : "NOT_CONFIGURED"
+        telegram: env.TELEGRAM_BOT_TOKEN ? "CONFIGURED" : "NOT_CONFIGURED"
       });
     }
 
