@@ -1,6 +1,27 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (request.method === "POST" && url.pathname === "/telegram") {
+    const update = await request.json();
+    const token = env.TELEGRAM_BOT_TOKEN;
+    const chatId = update.message?.chat?.id;
+    const message = update.message?.text;
+
+    if (token && chatId && message === "/start") {
+        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: "🤖 Byenvini nan BINGO AI PRO!\n\nSistèm Telegram ou konekte. Nap prepare analiz mache ak siyal trading yo."
+            })
+        });
+    }
+
+    return new Response("OK");
+    }
 
     if (url.pathname === "/api/status") {
       return Response.json({
